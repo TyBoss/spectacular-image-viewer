@@ -2,6 +2,97 @@ doctype html
 html
   head
     script(src='./static/app.js')
+    style(type='text/css').
+      .image-grid img {
+        max-height: 100px;
+        max-width: 100px;
+      }
+      .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .image-grid div {
+        padding: 12px 18px;
+      }
+      .image-grid div img {
+        cursor: pointer;
+      }
+
+      .turn-off {
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .turn-on {
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+        background-color: rgba(0,0,0,0.8);
+        z-index: 200000;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .title-holder {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .img-title {
+        color: #fff;
+      }
+
+      .light-cont {
+        display: flex;
+        height: 90%;
+        justify-content: center;
+        align-items: center;
+      }
   body
     h1 Image Viewer!!!
     div Preview of the Image Viewer
+      div(id='light-box' class='turn-off')
+        div.title-holder
+          div
+            h1.img-title
+        div.light-cont
+          div.image-viewer
+      div.image-grid
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
+        div
+          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')

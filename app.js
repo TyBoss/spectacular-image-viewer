@@ -3,6 +3,7 @@ const app = express()
 const path = require('path')
 const pug = require('pug')
 const Flickr = require('flickrapi')
+const { flickrParser } = require('./libs/image-parsers')
 
 const { promisify } = require('util')
 
@@ -28,7 +29,7 @@ app.get('/images', async (req, res, next) => {
   const search = promisify(flickrApi.photos.search)
 
   const results = await search({ text: 'sharingan' })
-  res.json(results.photos)
+  res.json(flickrParser(results.photos.photo))
   return
 })
 
