@@ -27,8 +27,8 @@ const setImageInBox = (index) => {
   imagine.src = img.url
   imageView.appendChild(imagine)
 
-  const moveToPrevious = document.querySelector('#light-box .previous')
-  const moveToNext = document.querySelector('#light-box .next')
+  const moveToPrevious = document.querySelector('#light-box .previous-btn')
+  const moveToNext = document.querySelector('#light-box .next-btn')
   
   if (index === 0) {
     moveToPrevious.classList.add('hide-me')

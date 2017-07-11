@@ -54,6 +54,21 @@ html
       .hide-me {
         display: none;
       }
+
+      a.next-btn div, a.previous-btn div {
+        background-image: url('static/assets/next.svg');
+        background-repeat: no-repeat;
+        background-size: 40px;
+        border-radius: 20px;
+        height: 40px;
+        width: 40px;
+        background-color: white;
+        cursor: pointer;
+      }
+
+      a.previous-btn div {
+        transform: rotate(180deg);
+      }
   body
     h1 Image Viewer!!!
     div Preview of the Image Viewer
@@ -62,9 +77,11 @@ html
           div
             h1.img-title
         div.light-cont
-          button.previous Previous
+          a.previous-btn
+            div
           div.image-viewer
-          button.next Next
+          a.next-btn
+            div
       div.image-grid
         div
           img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
