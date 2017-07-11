@@ -1,0 +1,30 @@
+{
+  "name": "spectacular-image-viewer",
+  "version": "1.0.0",
+  "description": "Image Viewer",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "flickrapi": "^0.6.0",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TyBoss/spectacular-image-viewer.git"
+  },
+  "author": "TyBoss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TyBoss/spectacular-image-viewer/issues"
+  },
+  "homepage": "https://github.com/TyBoss/spectacular-image-viewer#readme"
+}
