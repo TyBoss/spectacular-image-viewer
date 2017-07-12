@@ -13,9 +13,19 @@ html
       }
       .image-grid div {
         padding: 12px 18px;
+        width: 100px;
+        text-align: center;
+        display: flex;
       }
+
+      .image-grid div:hover {
+        box-shadow: 0px 0px 5px 5px lightblue;
+      }
+
       .image-grid div img {
         cursor: pointer;
+        display: block;
+        margin: auto;
       }
 
       .turn-off {
@@ -42,11 +52,12 @@ html
 
       .img-title {
         color: #fff;
+        margin-right: 95px;
       }
 
       .light-cont {
         display: flex;
-        height: 90%;
+        height: 650px;
         justify-content: center;
         align-items: center;
       }
@@ -69,24 +80,39 @@ html
       a.previous-btn div {
         transform: rotate(180deg);
       }
+
+      .navigation-btns {
+        display: flex;
+        width: 100%;
+        position: absolute;
+        top: 400px;
+      }
+
+      .navigation-btns div:first-child {
+        flex: 1;
+        margin-left: 45px;
+      }
+
+      .navigation-btns div:last-child {
+        margin-right: 45px;
+      }
   body
     h1 Image Viewer!!!
     div Preview of the Image Viewer
       div(id='light-box' class='turn-off')
+        div.navigation-btns
+          div
+            a.previous-btn
+              div
+          div
+            a.next-btn
+              div
         div.title-holder
           div
             h1.img-title
         div.light-cont
-          a.previous-btn
-            div
           div.image-viewer
-          a.next-btn
-            div
       div.image-grid
-        div
-          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
-        div
-          img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
         div
           img(src='https://farm3.staticflickr.com/2895/33963678125_b62598cb55.jpg')
         div
