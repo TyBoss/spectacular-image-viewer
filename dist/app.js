@@ -73,7 +73,7 @@ const setImageInBox = (index) => {
 
   if (index === viewerState.images.length - 1) {
     moveToNext.classList.add('hide-me')
-    removeNavigationAction(keyCodes.LEFT_ARROW)
+    removeNavigationAction(keyCodes.RIGHT_ARROW)
   } else {
     moveToNext.classList.remove('hide-me')
     const callNext = () => setImageInBox(index + 1)
