@@ -29,7 +29,7 @@ const setUpActions = () => {
   search.onclick = () => {
     const tbx = document.querySelector('#search-tbx')
     const imageGrid = document.querySelector('.image-grid')
-    imageGrid.innerHTML = null
+    imageGrid.innerHTML = ''
     fetchImages(tbx.value)
   }
 }
@@ -69,7 +69,7 @@ const setImageInBox = (index) => {
   imageTitle.title = img.title
 
   const imageView = document.querySelector('#light-box .image-viewer')
-  imageView.innerHTML = null
+  imageView.innerHTML = ''
   
   const imagine  = document.createElement('img')
   imagine.src = img.url

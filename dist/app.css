@@ -36,6 +36,10 @@
     opacity: 0;
   }
 
+  .turn-off .navigation-btns {
+    display: none
+  }
+
   .turn-on {
     height: 100%;
     width: 100%;
@@ -145,7 +149,7 @@
     background-image: url('/static/assets/loading.gif');
     background-repeat: no-repeat;
     background-size: 150px;
-    background-position: 500px 400px; 
+    background-position: center; 
   }
 
   .error {
