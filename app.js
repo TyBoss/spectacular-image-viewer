@@ -53,5 +53,6 @@ app.get('/images/:image', async ({ params: { image: text } }, res, next) => {
   return
 })
 
-app.listen(9001, () => console.log('App is running at 9001!!!!'))
+const PORT = process.env.PORT || 9001
+app.listen(PORT, () => console.log(`App is running at ${PORT}!!!!`))
 
