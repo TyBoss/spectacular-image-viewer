@@ -24,12 +24,32 @@ app.use('/static', express.static('dist'))
 
 app.get('/', (req, res) => res.render('index'))
 
-app.get('/images', async (req, res, next) => {
-  const flickrApi = await authenticate(flickrOptions)
-  const search = promisify(flickrApi.photos.search)
 
-  const results = await search({ text: 'sharingan' })
-  res.json(flickrParser(results.photos.photo))
+const fetchImages = async (text) => {
+   const flickrApi = await authenticate(flickrOptions)
+   const search = promisify(flickrApi.photos.search)
+  
+   const results = await search({ text })
+   return flickrParser(results.photos.photo)
+}
+
+app.get('/images', async (req, res, next) => {
+  try {
+    const results = await fetchImages('sharingan')
+    res.json(results)
+  } catch(ex) {
+    res.send(500, ex)
+  }
+  return
+})
+
+app.get('/images/:image', async ({ params: { image: text } }, res, next) => {
+  try {
+     const results = await fetchImages(text)
+     res.json(results) 
+  } catch (ex) {
+    res.send(500, ex)
+  }
   return
 })
 
