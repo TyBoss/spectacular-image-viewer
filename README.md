@@ -15,3 +15,4 @@ Image Previewer built using plain old JS and CSS as amazing as the discovery of 
 1. RUN NPM START
   * The server should launch at http://localhost:9001
   * You'll be able to hit to view images (currently retrieving the first 100 matches for "Sharingan")
+  * Page also includes some handy key events to allow you to navigate between images as well.
