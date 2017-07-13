@@ -11,6 +11,7 @@ Image Previewer built using plain old JS and CSS as amazing as the discovery of 
 ```
 
 1. SET the following environment parameters list above either in your bash_profile or shell.
+1. ENSURE THAT YOU HAVE NODE INSTALLED (v8.0)
 1. RUN NPM INSTALL
 1. RUN NPM START
   * The server should launch at http://localhost:9001
