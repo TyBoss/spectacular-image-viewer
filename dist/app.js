@@ -10,7 +10,6 @@ const keyCodes = {
 }
 const viewerState = {
   images: [],
-  currentIdx: null,
   keyAction: {
     [keyCodes.ESCAPE]: () => {
       const lightBox = document.querySelector('#light-box')
@@ -25,6 +24,19 @@ const setUpActions = () => {
       viewerState.keyAction[e.keyCode]()
     } 
   }, false)
+
+  const search = document.querySelector('#search-btn')
+  search.onclick = () => {
+    const tbx = document.querySelector('#search-tbx')
+    const imageGrid = document.querySelector('.image-grid')
+    imageGrid.innerHTML = null
+    fetchImages(tbx.value)
+  }
+}
+
+const toggleLoadingGenjutsu = () => {
+  const loader = document.querySelector('.loader')
+  loader.classList.toggle('loading')
 }
 
 const setUpNavigationActions = (key, action) => {
@@ -35,9 +47,13 @@ const removeNavigationAction = (key) => {
   delete viewerState.keyAction[key]
 }
 
+const showError = () => {
+  const imageGrid = document.querySelector('.image-grid')
+  imageGrid.classList.toggle('error')
+  imageGrid.innerText = 'An error has occurred. No images for you :('
+}
+
 const letThereBeLight = (index) => {
-  viewerState.currentIdx = index
-  
   const lightBox = document.querySelector('#light-box')
   lightBox.className = lightBox.className === 'turn-off' ? 'turn-on' : 'turn-off'
  
@@ -54,6 +70,7 @@ const setImageInBox = (index) => {
 
   const imageView = document.querySelector('#light-box .image-viewer')
   imageView.innerHTML = null
+  
   const imagine  = document.createElement('img')
   imagine.src = img.url
   imageView.appendChild(imagine)
@@ -82,13 +99,24 @@ const setImageInBox = (index) => {
   }
 }
 
-const fetchImages = () => {
+const fetchImages = (text) => { 
+  toggleLoadingGenjutsu()
   const xmlHTTPRequest = new XMLHttpRequest()
-  xmlHTTPRequest.open('GET', '/images', true)
+  xmlHTTPRequest.open('GET', text ? '/images/' + text : '/images', true)
   xmlHTTPRequest.onload = function () {
-    if (this.status === OK) {
-      viewerState.images = JSON.parse(this.response)
-      renderImages()
+    switch(this.status) {
+      case OK:
+        viewerState.images = JSON.parse(this.response)
+        renderImages()
+        toggleLoadingGenjutsu()
+        break
+      case BOOM:
+        toggleLoadingGenjutsu()
+        showError()
+        break
+      default:
+        console.log(this.status)
+        return
     }
   }
   xmlHTTPRequest.send()
@@ -106,5 +134,7 @@ const renderImages = () => {
   })
 }
 
-fetchImages()
-setUpActions()
+this.onload = () => {
+  fetchImages()
+  setUpActions()
+}

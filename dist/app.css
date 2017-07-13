@@ -135,3 +135,20 @@
     margin-top: 25px;
     margin-right: 8px;
   }
+
+  .loading {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url('/static/assets/loading.gif');
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position: 500px 400px; 
+  }
+
+  .error {
+    margin-top: 12px;
+    color: red;
+  }
