@@ -4,6 +4,7 @@ const path = require('path')
 const pug = require('pug')
 const Flickr = require('flickrapi')
 const { flickrParser } = require('./libs/image-parsers')
+const favicon = require('serve-favicon')
 
 const { promisify } = require('util')
 
@@ -21,9 +22,8 @@ const flickrOptions = {
 app.set('view engine', 'pug')
 app.set('views', './views')
 app.use('/static', express.static('dist'))
-
 app.get('/', (req, res) => res.render('index'))
-
+app.use(favicon(__dirname + '/dist/assets/favicon.ico'))
 
 const fetchImages = async (text) => {
    const flickrApi = await authenticate(flickrOptions)
