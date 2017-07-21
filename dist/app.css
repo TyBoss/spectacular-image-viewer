@@ -8,6 +8,8 @@
     width: 100px;
     text-align: center;
     display: flex;
+    background-color: #fff;
+    margin: 4px;
   }
 
   .image-grid .container:hover {
@@ -139,6 +141,16 @@
     background-repeat: no-repeat;
     background-size: 150px;
     background-position: center;
+    background-color: rgba(200, 0, 0, 0.2);
+  }
+
+  .pre-load {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    margin-top: 8px;
   }
 
   .error {

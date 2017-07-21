@@ -1,5 +1,16 @@
 (function () {
 
+  const preCreation = () => {
+    const imageGrid = document.querySelector('.image-grid')
+    for (var i = 0; i < 100; i++) {
+      const divContainer = document.createElement('div')
+      divContainer.className = 'container pre-load container-' + i
+      imageGrid.appendChild(divContainer)
+    }
+  }
+
+  preCreation()
+
   const httpResponses = {
     OK: 200,
     BOOM: 500
@@ -31,7 +42,6 @@
     search.onclick = () => {
       const tbx = document.querySelector('#search-tbx')
       const imageGrid = document.querySelector('.image-grid')
-      imageGrid.innerHTML = ''
       fetchImages(tbx.value)
     }
   }
@@ -127,13 +137,13 @@
   const renderImages = () => {
     const imageGrid = document.querySelector('.image-grid')
     viewerState.images.forEach((img, i) => {
-      const divContainer = document.createElement('div')
-      divContainer.className = 'container'
+      const divContainer = document.querySelector('.container-' + i)
+      divContainer.className = 'container container-' + i
+      divContainer.innerHTML = ''
       const image = document.createElement('img')
       divContainer.onclick = () => letThereBeLight(i)
       image.src = img.url
       divContainer.appendChild(image)
-      imageGrid.appendChild(divContainer)
     })
   }
 
