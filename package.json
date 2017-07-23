@@ -10,17 +10,30 @@
     "test": "test"
   },
   "dependencies": {
+    "css-loader": "^0.28.4",
+    "ejs": "^2.5.6",
     "express": "^4.15.3",
     "flickrapi": "^0.6.0",
+    "proxy-middleware": "^0.15.0",
     "pug": "^2.0.0-rc.2",
-    "serve-favicon": "^2.4.3"
+    "pug-loader": "^2.3.0",
+    "serve-favicon": "^2.4.3",
+    "style-loader": "^0.18.2"
   },
   "devDependencies": {
-    "mocha": "^3.4.2"
+    "copy-webpack-plugin": "^4.0.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.29.0",
+    "mocha": "^3.4.2",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
   },
   "scripts": {
     "test": "mocha",
-    "start": "node app.js"
+    "build": "webpack --config config/index.js",
+    "start": "node server.js",
+    "watch": "webpack --progress --watch",
+    "huh": "webpack-dev-server --open --debug"
   },
   "repository": {
     "type": "git",
