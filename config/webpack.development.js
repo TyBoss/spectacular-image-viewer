@@ -28,14 +28,9 @@ module.exports = {
       inject: 'body'
     }),
     new CopyWebpackPlugin([{
-      context: '../src/assets',
+      context: path.resolve(__dirname, '../', 'src/assets'),
       from: '**.*',
       to: 'assets'
-    },
-    {
-      context: path.resolve(__dirname, '..', 'src'),
-      from: 'app.css',
-      to: '.'
     }]),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('app.css')
