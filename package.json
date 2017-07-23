@@ -10,6 +10,7 @@
     "test": "test"
   },
   "dependencies": {
+    "babili-webpack-plugin": "^0.1.2",
     "css-loader": "^0.28.4",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
@@ -18,7 +19,9 @@
     "pug": "^2.0.0-rc.2",
     "pug-loader": "^2.3.0",
     "serve-favicon": "^2.4.3",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "uglify-js": "^3.0.25",
+    "uglifyjs-webpack-plugin": "^0.4.6"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",

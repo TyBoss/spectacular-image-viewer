@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const pug = require('pug')
 const Flickr = require('flickrapi')
 const { flickrParser } = require('./libs/image-parsers')
 const favicon = require('serve-favicon')
@@ -10,7 +9,7 @@ const proxy = require('proxy-middleware')
 
 const ENV = process.env.NODE_ENV || 'development'
 
-const webPackConfig = require(`./config/webpack.${ENV}`)
+const webPackConfig = require('./config')
 
 const app = express()
 

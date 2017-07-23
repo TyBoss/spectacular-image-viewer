@@ -1,17 +1,22 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BabiliPlugin = require("babili-webpack-plugin")
 
 module.exports = {
-  entry: './src/app.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    loaders: [
-      { test: /\.pug$/,  loader: "pug-loader" },
-      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] }
-    ]
-  }
+  devtool: 'source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '..', 'src/views/index.pug'),
+      inject: 'body'
+    }),
+    new CopyWebpackPlugin([{
+      context: path.resolve(__dirname, '../', 'src/assets'),
+      from: '**.*',
+      to: 'assets'
+    }]),
+    new ExtractTextPlugin('app.css'),
+    new BabiliPlugin()
+  ]
 }

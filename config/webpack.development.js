@@ -7,21 +7,9 @@ const webpack = require('webpack')
 module.exports = {
   entry: [
     './src/app.js',
-    './src/app.css',
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:9010'
   ],
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, '..', 'dist'),
-    publicPath: '/dist'
-  },
-  module: {
-    loaders: [
-      { test: /\.pug$/,  loader: "pug-loader" },
-      { test: /\.css$/, loaders: ExtractTextPlugin.extract('css-loader') }
-    ]
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', 'src/views/index.pug'),
