@@ -69,7 +69,7 @@ const letThereBeLight = (index) => {
   const lightBox = document.querySelector('#light-box')
   lightBox.className = lightBox.className === 'turn-off' ? 'turn-on' : 'turn-off'
 
-  const closeBtn =  document.querySelector('#light-box .close')
+  const closeBtn =  document.querySelector('.action-btn.close')
   closeBtn.onclick = viewerState.keyAction[keyCodes.ESCAPE]
   setImageInBox(index)
 }
@@ -80,7 +80,7 @@ const setImageInBox = (index) => {
   imageTitle.innerText = img.title
   imageTitle.title = img.title
 
-  const imageView = document.querySelector('#light-box .image-viewer')
+  const imageView = document.querySelector('#light-box .image-frame')
   imageView.innerHTML = ''
 
   const imagine  = document.createElement('img')
