@@ -64,8 +64,9 @@ const PORT = process.env.PORT || 9001
 
 if (ENV === 'development') {
   const devServer = new WebpackDevServer(webpack(webPackConfig), {
+    hot: true,
     stats: { colors: true },
-    contentBase: path.resolve(__dirname, '..', "dist")
+    contentBase: "dist/"
   })
 
   devServer.use('/images', proxy(`http://localhost:${PORT}/images`))
