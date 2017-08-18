@@ -1,8 +1,7 @@
 doctype html
 html
   head
-    script(src='./static/app.js')
-    link(rel='stylesheet' href='./static/app.css')
+    title Image Viewer Genjutsu!
   body
     h1 Image Viewer!!!
     div Search returns first 100 results!
@@ -11,19 +10,14 @@ html
       input(type='text' id='search-tbx')
       button(id='search-btn') Search
       div(id='light-box' class='turn-off')
-        div.navigation-btns
-          div
-            a.previous-btn
-              div
-          div
-            a.next-btn
-              div
         div.title-holder
           div.title-container
             h1.img-title
+          div.navigation-btns
+            div.action-btn.previous
+            div.action-btn.next
+        div.right-section
           div.close-container
-            a.close-btn
-              div
-        div.light-cont
-          div.image-viewer
+            div.action-btn.close
+          div.image-frame
       div.image-grid

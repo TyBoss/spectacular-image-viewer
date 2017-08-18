@@ -11,7 +11,7 @@ describe('flickrParser', () => {
 
     const expectedResult = [
       {
-	"title": "Sharingan",
+	      "title": "Sharingan",
         "url": "https://farm5.staticflickr.com/4270/34949204705_aeb4049204.jpg"
       },
       {
@@ -23,7 +23,7 @@ describe('flickrParser', () => {
         "url": "https://farm3.staticflickr.com/2891/33805767512_63f53b748c.jpg"
       }
     ]
-	    
+
     const result = parsers.flickrParser(images)
     assert.deepEqual(result, expectedResult)
   })

@@ -1,10 +1,17 @@
 const express = require('express')
-const app = express()
 const path = require('path')
-const pug = require('pug')
 const Flickr = require('flickrapi')
 const { flickrParser } = require('./libs/image-parsers')
 const favicon = require('serve-favicon')
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const proxy = require('proxy-middleware')
+
+const ENV = process.env.NODE_ENV || 'development'
+
+const webPackConfig = require('./config')
+
+const app = express()
 
 const { promisify } = require('util')
 
@@ -19,16 +26,16 @@ const flickrOptions = {
   progress: false
 }
 
-app.set('view engine', 'pug')
-app.set('views', './views')
-app.use('/static', express.static('dist'))
-app.get('/', (req, res) => res.render('index'))
+app.set('view engine', require('ejs').renderFile)
+app.set('views', './src/views')
+app.use('/dist', express.static('dist'))
+app.get('/', (req, res) => res.sendFile('index.html', { root: './dist' }))
 app.use(favicon(__dirname + '/dist/assets/favicon.ico'))
 
 const fetchImages = async (text) => {
    const flickrApi = await authenticate(flickrOptions)
    const search = promisify(flickrApi.photos.search)
-  
+
    const results = await search({ text })
    return flickrParser(results.photos.photo)
 }
@@ -46,7 +53,7 @@ app.get('/images', async (req, res, next) => {
 app.get('/images/:image', async ({ params: { image: text } }, res, next) => {
   try {
      const results = await fetchImages(text)
-     res.json(results) 
+     res.json(results)
   } catch (ex) {
     res.send(500, ex)
   }
@@ -54,7 +61,18 @@ app.get('/images/:image', async ({ params: { image: text } }, res, next) => {
 })
 
 const PORT = process.env.PORT || 9001
+
+if (ENV === 'development') {
+  const devServer = new WebpackDevServer(webpack(webPackConfig), {
+    hot: true,
+    stats: { colors: true },
+    contentBase: "dist/"
+  })
+
+  devServer.use('/images', proxy(`http://localhost:${PORT}/images`))
+  devServer.use('/dist', proxy(`http://localhost:${PORT}/dist`))
+  devServer.listen(9010, console.log('Hot live reload action at 9010!'))
+}
+
 app.set('port', PORT);
-
 app.listen(PORT, () => console.log(`App is running at ${PORT}!!!!`))
-

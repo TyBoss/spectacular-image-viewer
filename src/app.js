@@ -1,7 +1,20 @@
-console.log('meh')
+require('./app.css')
 
-const OK = 200;
-const BOOM = 500;
+const preCreation = () => {
+  const imageGrid = document.querySelector('.image-grid')
+  for (var i = 0; i < 100; i++) {
+    const divContainer = document.createElement('div')
+    divContainer.className = 'container pre-load container-' + i
+    imageGrid.appendChild(divContainer)
+  }
+}
+
+preCreation()
+
+const httpResponses = {
+  OK: 200,
+  BOOM: 500
+}
 
 const keyCodes = {
   ESCAPE: 27,
@@ -19,17 +32,16 @@ const viewerState = {
 }
 
 const setUpActions = () => {
-  this.addEventListener('keyup', (e) => {
+  window.addEventListener('keyup', (e) => {
     if (viewerState.keyAction[e.keyCode]) {
       viewerState.keyAction[e.keyCode]()
-    } 
+    }
   }, false)
 
   const search = document.querySelector('#search-btn')
   search.onclick = () => {
     const tbx = document.querySelector('#search-tbx')
     const imageGrid = document.querySelector('.image-grid')
-    imageGrid.innerHTML = ''
     fetchImages(tbx.value)
   }
 }
@@ -40,7 +52,7 @@ const toggleLoadingGenjutsu = () => {
 }
 
 const setUpNavigationActions = (key, action) => {
-  viewerState.keyAction[key] = action 
+  viewerState.keyAction[key] = action
 }
 
 const removeNavigationAction = (key) => {
@@ -56,10 +68,10 @@ const showError = () => {
 const letThereBeLight = (index) => {
   const lightBox = document.querySelector('#light-box')
   lightBox.className = lightBox.className === 'turn-off' ? 'turn-on' : 'turn-off'
- 
-  const closeBtn =  document.querySelector('#light-box .close-btn')
-  closeBtn.onclick = viewerState.keyAction[keyCodes.ESCAPE] 
-  setImageInBox(index)  
+
+  const closeBtn =  document.querySelector('.action-btn.close')
+  closeBtn.onclick = viewerState.keyAction[keyCodes.ESCAPE]
+  setImageInBox(index)
 }
 
 const setImageInBox = (index) => {
@@ -68,22 +80,22 @@ const setImageInBox = (index) => {
   imageTitle.innerText = img.title
   imageTitle.title = img.title
 
-  const imageView = document.querySelector('#light-box .image-viewer')
+  const imageView = document.querySelector('#light-box .image-frame')
   imageView.innerHTML = ''
-  
+
   const imagine  = document.createElement('img')
   imagine.src = img.url
   imageView.appendChild(imagine)
 
-  const moveToPrevious = document.querySelector('#light-box .previous-btn')
-  const moveToNext = document.querySelector('#light-box .next-btn')
-  
+  const moveToPrevious = document.querySelector('#light-box .previous')
+  const moveToNext = document.querySelector('#light-box .next')
+
   if (index === 0) {
     moveToPrevious.classList.add('hide-me')
     removeNavigationAction(keyCodes.LEFT_ARROW)
   } else {
     moveToPrevious.classList.remove('hide-me')
-    const callPrevious = () => setImageInBox(index - 1) 
+    const callPrevious = () => setImageInBox(index - 1)
     moveToPrevious.onclick = callPrevious
     setUpNavigationActions(keyCodes.LEFT_ARROW, callPrevious)
   }
@@ -99,18 +111,18 @@ const setImageInBox = (index) => {
   }
 }
 
-const fetchImages = (text) => { 
+const fetchImages = (text) => {
   toggleLoadingGenjutsu()
   const xmlHTTPRequest = new XMLHttpRequest()
   xmlHTTPRequest.open('GET', text ? '/images/' + text : '/images', true)
   xmlHTTPRequest.onload = function () {
     switch(this.status) {
-      case OK:
+      case httpResponses.OK:
         viewerState.images = JSON.parse(this.response)
         renderImages()
         toggleLoadingGenjutsu()
         break
-      case BOOM:
+      case httpResponses.BOOM:
         toggleLoadingGenjutsu()
         showError()
         break
@@ -123,18 +135,19 @@ const fetchImages = (text) => {
 }
 
 const renderImages = () => {
-  const imageGrid = document.querySelector('.image-grid')    
+  const imageGrid = document.querySelector('.image-grid')
   viewerState.images.forEach((img, i) => {
-    const divContainer = document.createElement('div')
-    const image = document.createElement('img')   
+    const divContainer = document.querySelector('.container-' + i)
+    divContainer.className = 'container container-' + i
+    divContainer.innerHTML = ''
+    const image = document.createElement('img')
     divContainer.onclick = () => letThereBeLight(i)
     image.src = img.url
-    divContainer.appendChild(image) 
-    imageGrid.appendChild(divContainer)
+    divContainer.appendChild(image)
   })
 }
 
-this.onload = () => {
+window.onload = () => {
   fetchImages()
   setUpActions()
 }
